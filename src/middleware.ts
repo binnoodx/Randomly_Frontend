@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
 
   const token = await getToken({
     req: request,
-    secret: "abc",
+    secret: process.env.NEXTAUTH_SECRET!,
   });
 
   const isProtected = ["/home"].some((path) =>
@@ -16,8 +16,9 @@ export async function middleware(request: NextRequest) {
 
   if (isProtected && !token) {
     console.log("No token found! Redirecting to /userLogin");
-    return NextResponse.redirect(new URL("/userLogin", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
+  
 
   console.log("Token found");
   return NextResponse.next();
