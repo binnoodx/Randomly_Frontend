@@ -12,7 +12,7 @@ export async function dbConnect() {
 
         // ✅ Fix 2: Add 'error' event with the error object
         connection.on("error", (err) => {
-            console.log("MongoDB connection error:", err);
+            console.log("There is MongoDB connection error:", err);
             process.exit(1); // Exit with error code
         });
 
